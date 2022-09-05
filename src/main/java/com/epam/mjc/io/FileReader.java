@@ -11,29 +11,27 @@ public class FileReader {
         Map<String, String> personalData = new HashMap<>();
         Profile profile = new Profile();
         String data;
-// 1 todo first way but not better
-//          try (InputStream in = new FileInputStream("Profile.txt")) {
-//                 BufferedReader reader = new BufferedReader(new InputStreamReader(in));
-//                 while ((data = reader.readLine()) != null){
-//                     String[] keyValue = data.split(":");
-//                     personalData.put(keyValue[0].trim(), keyValue[1].trim());
-//                 }
-//             } catch (FileNotFoundException e) {
-//                 throw new RuntimeException(e);
-//             } catch (IOException e) {
-//                 throw new RuntimeException(e);
-//             }
+// 1 todo first way
+         try (InputStream in = new FileInputStream(file)) {
+                BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+                while ((data = reader.readLine()) != null){
+                    String[] keyValue = data.split(":");
+                    personalData.put(keyValue[0].trim(), keyValue[1].trim());
+                }
+            }catch (IOException e) {
+                e.printStackTrace();
+            }
 
 
 // 2 todo second way
-        try(BufferedReader reader = new BufferedReader(new java.io.FileReader("Profile.txt"))) {
-            while ((data = reader.readLine()) != null){
-                String[] keyValue = data.split(":");
-                personalData.put(keyValue[0].trim(), keyValue[1].trim());
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+//         try(BufferedReader reader = new BufferedReader(new java.io.FileReader("Profile.txt"))) {
+//             while ((data = reader.readLine()) != null){
+//                 String[] keyValue = data.split(":");
+//                 personalData.put(keyValue[0].trim(), keyValue[1].trim());
+//             }
+//         } catch (IOException e) {
+//             e.printStackTrace();
+//         }
 
         profile.setName(personalData.get("Name"));
         profile.setAge(Integer.parseInt(personalData.get("Age")));
