@@ -32,7 +32,7 @@ public class FileReader {
                 personalData.put(keyValue[0].trim(), keyValue[1].trim());
             }
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
         }
 
         profile.setName(personalData.get("Name"));
